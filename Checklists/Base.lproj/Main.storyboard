@@ -142,10 +142,14 @@
                     <navigationItem key="navigationItem" title="Add Item" id="dlQ-SE-MTR">
                         <barButtonItem key="leftBarButtonItem" title="Item" systemItem="cancel" id="5cw-Aj-1wB">
                             <connections>
-                                <action selector="cancle:" destination="zYW-lS-oCR" id="yy9-aj-Ms6"/>
+                                <action selector="cancle:" destination="zYW-lS-oCR" id="cJR-t4-EEB"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="done" id="Dqi-RA-eYU"/>
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="done" id="Dqi-RA-eYU">
+                            <connections>
+                                <action selector="done:" destination="zYW-lS-oCR" id="p16-RS-nLc"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="doneBarButton" destination="Dqi-RA-eYU" id="vx2-wg-zxQ"/>

@@ -9,6 +9,7 @@
 #import "AllListsTableViewController.h"
 #import "Checklist.h"
 #import "ViewController.h"
+#import "ChecklistItem.h"
 
 @interface AllListsTableViewController ()
 
@@ -34,6 +35,12 @@
     list = [[Checklist alloc]init];
     list.name = @"家庭";
     [_lists addObject:list];
+    
+    for(Checklist *list in _lists){
+        ChecklistItem *item = [[ChecklistItem alloc]init];
+        item.text = [NSString stringWithFormat:@"item for : %@", list.name];
+        [list.items addObject:item];
+    }
 }
     return self;
 }

@@ -53,7 +53,6 @@
     if(self.itemToEdit == nil){
         ChecklistItem *item = [[ChecklistItem alloc]init];
         item.text = self.textField.text;
-        item.checked = NO;
         [self.delegate itemDetailViewController:self didFinishAddingItem:item];
     }else{
         self.itemToEdit.text = self.textField.text;
