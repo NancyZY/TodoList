@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "ChecklistItem.h"
+#import "Checklist.h"
 
 @interface ViewController ()
 
@@ -38,7 +39,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    NSLog(@"name is %@", self.checklist.name);
+    self.title = self.checklist.name;
     // Do any additional setup after loading the view, typically from a nib.
 }
 
