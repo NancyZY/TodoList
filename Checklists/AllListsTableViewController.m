@@ -29,6 +29,11 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
+}
+
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     self.navigationController.delegate = self;
@@ -62,7 +67,16 @@
     Checklist *checklist = self.dataModel.lists[indexPath.row];
     cell.textLabel.text = checklist.name;
     cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
-//    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d Remaining", [checklist countUncheckedItems]];
+    
+    int count = [checklist countUncheckedItems];
+    if([checklist.items count]==0){
+        cell.detailTextLabel.text = @"(No Items)";
+    }else if(count == 0){
+        cell.detailTextLabel.text =@"全部搞定收 !";
+    }else{
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%d Remaining",count];
+    }
+    
     
     
     return cell;
