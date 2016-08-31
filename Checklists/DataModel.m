@@ -75,4 +75,8 @@
         [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"FirstTime"];
     }
 }
+
+-(void)sortChecklists{
+    [self.lists sortUsingSelector:@selector(compare:)];
+}
 @end
