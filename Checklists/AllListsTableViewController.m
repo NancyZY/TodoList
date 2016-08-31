@@ -77,7 +77,7 @@
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%d Remaining",count];
     }
     
-    
+    cell.imageView.image = [UIImage imageNamed:checklist.iconName];
     
     return cell;
 }

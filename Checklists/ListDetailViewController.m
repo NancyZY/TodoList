@@ -13,7 +13,16 @@
 
 @end
 
-@implementation ListDetailViewController
+@implementation ListDetailViewController{
+    NSString *_iconName;
+}
+
+-(id)initWithCoder:(NSCoder *)aDecoder{
+    if((self = [super initWithCoder:aDecoder])){
+        _iconName = @"Folder";
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -22,7 +31,10 @@
         self.title = @"Edit Checklist";
         self.textField.text = self.checklistToEdit.name;
         self.doneBarButton.enabled = YES;
+        _iconName = self.checklistToEdit.iconName;
     }
+    
+    self.iconImageView.image = [UIImage imageNamed:_iconName];
 }
 
 // 输入框获取焦点事件
@@ -45,16 +57,22 @@
     if(self.checklistToEdit == nil){
         Checklist *checklist = [[Checklist alloc]init];
         checklist.name = self.textField.text;
+        checklist.iconName = _iconName;
         [self.delegate listDetailViewController:self didFinishAddingChecklist:checklist];
     }else{
         self.checklistToEdit.name = self.textField.text;
+        self.checklistToEdit.iconName = _iconName;
         [self.delegate listDetailViewController:self didFinishEditingChecklist:self.checklistToEdit];
     }
     
 }
 
 -(NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    return nil;
+    if(indexPath.section == 1){
+        return indexPath;
+    }else{
+        return nil;
+    }
 }
 
 
@@ -65,14 +83,23 @@
     return YES;
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if([segue.identifier isEqualToString:@"PickIcon"]){
+        IconPickerViewController *controller = segue.destinationViewController;
+        controller.delegate = self;
+    }
 }
-*/
+
+-(void)iconPicker:(IconPickerViewController *)picker didPickIcon:(NSString *)iconName{
+    _iconName = iconName;
+    self.iconImageView.image = [UIImage imageNamed:_iconName];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 
 @end
